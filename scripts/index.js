@@ -150,7 +150,7 @@ fs.emptyDir(paths.appBuild)
       }).apply(webpackCompiler);
       
       let watchOptions = {
-        poll: watchOptionsPoll || false;
+        poll: watchOptionsPoll || false
       };
       webpackCompiler.watch(watchOptions, (err, stats) => {
         if (err) {
