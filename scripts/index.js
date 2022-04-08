@@ -21,6 +21,7 @@ const {
     chunkFilename,
     afterInitialBuildHook,
     afterRebuildHook,
+    watchOptionsPoll,
   },
 } = require('../utils/cliHandler');
 const { getReactScriptsVersion, isEjected } = require('../utils');
@@ -147,8 +148,11 @@ fs.emptyDir(paths.appBuild)
           inProgress = true;
         }
       }).apply(webpackCompiler);
-
-      webpackCompiler.watch({}, (err, stats) => {
+      
+      let watchOptions = {
+        poll: watchOptionsPoll || false;
+      };
+      webpackCompiler.watch(watchOptions, (err, stats) => {
         if (err) {
           return reject(err);
         }
