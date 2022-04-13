@@ -22,6 +22,7 @@ const {
     afterInitialBuildHook,
     afterRebuildHook,
     watchOptionsPoll,
+    watchOptionsIgnored,
   },
 } = require('../utils/cliHandler');
 const { getReactScriptsVersion, isEjected } = require('../utils');
@@ -150,7 +151,8 @@ fs.emptyDir(paths.appBuild)
       }).apply(webpackCompiler);
       
       let watchOptions = {
-        poll: watchOptionsPoll || false
+        poll: watchOptionsPoll || undefined,
+        ignored: watchOptionsIgnored || undefined
       };
       webpackCompiler.watch(watchOptions, (err, stats) => {
         if (err) {
